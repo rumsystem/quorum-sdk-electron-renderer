@@ -5,7 +5,7 @@ Quorum-sdk includes two npm packages:
 1. Quorum-sdk-electron-renderer
 2. [Quorum-sdk-electron-main](https://bitbucket.org/pressone/quorum-sdk-electron-main)
 
-![](https://user-images.githubusercontent.com/8716838/155664505-9385309e-9b9d-4a74-b6d3-f68e0930b4c0.png)
+![](https://user-images.githubusercontent.com/8716838/155666831-5bdfdaa7-e652-4a7b-ae29-2befa34f0e7c.png)
 
 > Quorum-sdk-electron-renderer is the package for your Electron renderer process to interact with [Quorum](https://github.com/rumsystem/quorum).
 
