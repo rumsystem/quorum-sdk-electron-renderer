@@ -17,7 +17,7 @@ $ npm install quorum-sdk-electron-renderer
 
 Make sure you have installed and setup [Quorum-sdk-electron-main]() in Electron main process.
 
-```js
+```javascript
 import QuorumSDK from 'quorum-sdk-electron-renderer';
 
 (async () => {
