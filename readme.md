@@ -3,7 +3,9 @@
 Quorum-sdk includes two npm packages:
 
 1. Quorum-sdk-electron-renderer
-2. [Quorum-sdk-electron-main]()
+2. [Quorum-sdk-electron-main](https://bitbucket.org/pressone/quorum-sdk-electron-main)
+
+![](https://user-images.githubusercontent.com/8716838/155664505-9385309e-9b9d-4a74-b6d3-f68e0930b4c0.png)
 
 > Quorum-sdk-electron-renderer is the package for your Electron renderer process to interact with [Quorum](https://github.com/rumsystem/quorum).
 
@@ -15,9 +17,9 @@ $ npm install quorum-sdk-electron-renderer
 
 ## QuorumClient
 
-Make sure you have installed and setup [Quorum-sdk-electron-main]() in Electron main process.
+** Note: Make sure you have installed and setup [Quorum-sdk-electron-main](https://bitbucket.org/pressone/quorum-sdk-electron-main) in Electron main process. **
 
-```javascript
+```js
 import QuorumSDK from 'quorum-sdk-electron-renderer';
 
 (async () => {
@@ -85,6 +87,7 @@ await QuorumClient.Group.leave(group.group_id);
 ### create object
 
 ```js
+const objectId = '1';
 const object = await QuorumClient.Object.put(group.user_pubkey, {
   type: 'Add',
   object: {
@@ -118,7 +121,7 @@ await QuorumClient.Object.getByTrxId(object.TrxId);
 const updatedObject = await QuorumClient.Object.put(group.user_pubkey, {
   type: 'Add',
   object: {
-    id: object.Content.id,
+    id: object.Content.id, // pass the object id that you want to update
     type: 'Note',
     content: 'test',
   },
@@ -153,4 +156,4 @@ QuorumClientTest.start();
 // open devTool console and check out testing process and logs
 ```
 
-Full testing file: [test.ts]()
+Full testing file: [test.ts](./src/test.ts)
