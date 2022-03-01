@@ -12,7 +12,7 @@ Quorum-sdk includes two npm packages:
 ## Install
 
 ```
-$ npm install quorum-sdk-electron-renderer
+$ yarn add quorum-sdk-electron-renderer
 ```
 
 ## QuorumClient
