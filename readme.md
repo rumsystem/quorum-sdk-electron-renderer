@@ -13,11 +13,9 @@ Quorum-sdk includes two npm packages:
 $ npm install quorum-sdk-electron-renderer
 ```
 
-## Usage
+## QuorumClient
 
 Make sure you have installed and setup [Quorum-sdk-electron-main]() in Electron main process.
-
-### QuorumClient
 
 ```js
 import QuorumSDK from 'quorum-sdk-electron-renderer';
@@ -31,32 +29,32 @@ import QuorumSDK from 'quorum-sdk-electron-renderer';
 })();
 ```
 
-### Node
+## Node
 
-#### fetch node status
+### fetch node status
 
 ```js
 const status = await QuorumClient.Node.status();
 console.log(status);
 ```
 
-#### fetch node info
+### fetch node info
 
 ```js
 const info = await QuorumClient.Node.info();
 console.log(info);
 ```
 
-#### fetch node network
+### fetch node network
 
 ```js
 const network = await QuorumClient.Node.network();
 console.log(network);
 ```
 
-### Group
+## Group
 
-#### create group
+### create group
 
 ```js
 const group = await QuorumClient.Group.create({
@@ -68,23 +66,23 @@ const group = await QuorumClient.Group.create({
 console.log(group);
 ```
 
-#### list groups
+### list groups
 
 ```js
 const groups = await QuorumClient.Group.list() || [];
 console.log(groups);
 ```
 
-#### leave group
+### leave group
 
 ```js
 await QuorumClient.Group.leave(group.group_id);
 ```
 
 
-### Object
+## Object
 
-#### create object
+### create object
 
 ```js
 const object = await QuorumClient.Object.put(group.user_pubkey, {
@@ -102,19 +100,19 @@ const object = await QuorumClient.Object.put(group.user_pubkey, {
 console.log(object);
 ```
 
-#### get object
+### get object
 
 ```js
 await QuorumClient.Object.get(object.Content.id);
 ```
 
-#### get object by TrxId
+### get object by TrxId
 
 ```js
 await QuorumClient.Object.getByTrxId(object.TrxId);
 ```
 
-#### update object
+### update object
 
 ```js
 const updatedObject = await QuorumClient.Object.put(group.user_pubkey, {
@@ -132,20 +130,20 @@ const updatedObject = await QuorumClient.Object.put(group.user_pubkey, {
 console.log(updatedObject);
 ```
 
-#### delete object
+### delete object
 
 ```js
 await QuorumClient.Object.delete(group.group_id, object.Content.id);
 ```
 
-#### list objects
+### list objects
 
 ```js
 const objects = await QuorumClient.Object.list();
 console.log(objects);
 ```
 
-### Run testing script
+## Run testing script
 
 ```js
 import { QuorumClientTest } from 'quorum-sdk-electron-renderer';
