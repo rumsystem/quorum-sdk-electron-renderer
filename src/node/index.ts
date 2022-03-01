@@ -61,7 +61,6 @@ export default class Node {
     let done = false;
     let count = 0;
     while (!done) {
-      console.log({ pingCount: count });
       try {
         await this.info();
         done = true;
