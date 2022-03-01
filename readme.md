@@ -153,7 +153,7 @@ import { QuorumClientTest } from 'quorum-sdk-electron-renderer';
 
 QuorumClientTest.start();
 
-// open devTool console and check out testing process and logs
+// open devTool console and check out testing process and logs.
 ```
 
 Full testing file: [test.ts](./src/test.ts)
