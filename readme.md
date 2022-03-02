@@ -176,7 +176,7 @@ await QuorumClient.Auth.updateAuthList({
   type: 'upd_alw_list',
   config: {
     action: 'add',
-    pubkey: player2Publisher,
+    pubkey: publisher,
     trx_type: ['POST'],
     memo: '',
   },
@@ -190,7 +190,7 @@ await QuorumClient.Auth.updateAuthList({
   type: 'upd_alw_list',
   config: {
     action: 'remove',
-    pubkey: player2Publisher,
+    pubkey: publisher,
     trx_type: ['POST'],
     memo: '',
   },
@@ -204,7 +204,7 @@ await QuorumClient.Auth.updateAuthList({
   type: 'upd_dny_list',
   config: {
     action: 'add',
-    pubkey: player2Publisher,
+    pubkey: publisher,
     trx_type: ['POST'],
     memo: '',
   },
@@ -218,7 +218,7 @@ await QuorumClient.Auth.updateAuthList({
   type: 'upd_dny_list',
   config: {
     action: 'remove',
-    pubkey: player2Publisher,
+    pubkey: publisher,
     trx_type: ['POST'],
     memo: '',
   },

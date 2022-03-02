@@ -132,13 +132,13 @@ export default {
       const groupId = group.group_id;
       const followingRule = await QuorumClient.Auth.getFollowingRule(groupId, 'POST');
       assert(followingRule, 'get following rule');
-      const player2Publisher = 'CAISIQOx6+HI0x1Gaosl5YvNfexQD1qJpA8xVeOIh7DL+UmGZw==';
+      const publisher = 'CAISIQOx6+HI0x1Gaosl5YvNfexQD1qJpA8xVeOIh7DL+UmGZw==';
       const addAllowListRet = await QuorumClient.Auth.updateAuthList({
         group_id: groupId,
         type: 'upd_alw_list',
         config: {
           action: 'add',
-          pubkey: player2Publisher,
+          pubkey: publisher,
           trx_type: ['POST'],
           memo: '',
         },
@@ -149,7 +149,7 @@ export default {
         type: 'upd_alw_list',
         config: {
           action: 'remove',
-          pubkey: player2Publisher,
+          pubkey: publisher,
           trx_type: ['POST'],
           memo: '',
         },
@@ -170,7 +170,7 @@ export default {
         type: 'upd_dny_list',
         config: {
           action: 'add',
-          pubkey: player2Publisher,
+          pubkey: publisher,
           trx_type: ['POST'],
           memo: '',
         },
@@ -181,7 +181,7 @@ export default {
         type: 'upd_dny_list',
         config: {
           action: 'remove',
-          pubkey: player2Publisher,
+          pubkey: publisher,
           trx_type: ['POST'],
           memo: '',
         },
