@@ -6,13 +6,15 @@ import _Object from './object';
 
 import Group from './group';
 
+import Auth from './auth';
+
 import { sendRequest, ProcessStatus, initQuorum } from './utils/quorumUtils';
 
 import Test from './test';
 
 export interface IStore {
   db: Database
-  port: number
+  apiOrigin: string
 }
 
 export interface UpParam {
@@ -31,6 +33,8 @@ export default class QuorumClient {
 
   Group: Group
 
+  Auth: Auth
+
   constructor() {
     this.store = {} as IStore;
     this.store.db = new Database();
@@ -39,6 +43,7 @@ export default class QuorumClient {
     this.Node = new Node(this.store);
     this.Object = new _Object(this.store);
     this.Group = new Group(this.store);
+    this.Auth = new Auth(this.store);
 
     initQuorum();
   }
@@ -48,7 +53,7 @@ export default class QuorumClient {
       action: 'up',
       param,
     });
-    this.store.port = status.port;
+    this.store.apiOrigin = `https://127.0.0.1:${status.port}`;;
     await this.Node.ping()
     return status;
   }

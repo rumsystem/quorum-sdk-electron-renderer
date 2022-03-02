@@ -73,14 +73,10 @@ export default class Group {
     this.store = store;
   }
 
-  getApiBase() {
-    return `https://127.0.0.1:${this.store.port}`;
-  }
-
   async list() {
     const { groups } = await (request('/api/v1/groups', {
       method: 'GET',
-      base: this.getApiBase(),
+      origin: this.store.apiOrigin,
     }) as Promise<IGetGroupsResult>);
     return groups;
   }
@@ -93,7 +89,7 @@ export default class Group {
   }) {
     return request('/api/v1/group', {
       method: 'POST',
-      base: this.getApiBase(),
+      origin: this.store.apiOrigin,
       body: {
         group_name: params.group_name,
         consensus_type: params.consensus_type,
@@ -106,13 +102,13 @@ export default class Group {
   async leave(groupId: string) {
     await request('/api/v1/group/clear', {
       method: 'POST',
-      base: this.getApiBase(),
+      origin: this.store.apiOrigin,
       body: { group_id: groupId },
       jwt: true,
     })
     await request('/api/v1/group/leave', {
       method: 'POST',
-      base: this.getApiBase(),
+      origin: this.store.apiOrigin,
       body: { group_id: groupId },
     }) as Promise<IGroupResult>;
     await this.store.db.objects.where({ GroupId: groupId}).delete();

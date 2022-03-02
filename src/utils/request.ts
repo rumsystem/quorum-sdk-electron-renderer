@@ -1,7 +1,7 @@
 import sleep from './sleep';
 
 interface RequestOption extends Omit<RequestInit, 'body'> {
-  base: string
+  origin: string
   isTextResponse: boolean
   minPendingDuration: number
   body: unknown
@@ -16,12 +16,12 @@ export default async (url: string, options: Partial<RequestOption> = {}) => {
     options.headers = { 'Content-Type': 'application/json' };
     options.body = JSON.stringify(options.body);
   }
-  if (!options.base) {
+  if (!options.origin) {
     options.credentials = 'include';
   }
 
   const result = await Promise.all([
-    fetch(new Request((options.base || '') + url), options as RequestInit),
+    fetch(new Request((options.origin || '') + url), options as RequestInit),
     sleep(options.minPendingDuration ? options.minPendingDuration : 0),
   ]);
   const res: any = result[0];

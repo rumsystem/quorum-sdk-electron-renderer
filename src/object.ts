@@ -46,10 +46,6 @@ export default class _Object {
     this.onChangeSubs = [];
   }
 
-  getApiBase() {
-    return `https://127.0.0.1:${this.store.port}`;
-  }
-
   get(id: string) {
     return this.store.db.objects.get({
       'Content.id': id
@@ -69,7 +65,7 @@ export default class _Object {
   async put(publisher: string, payload: IPutPayload) {
     const res = await (request('/api/v1/group/content', {
       method: 'POST',
-      base: this.getApiBase(),
+      origin: this.store.apiOrigin,
       body: payload,
     }) as Promise<IPostContentResult>);
     const existObject = await this.get(payload.object.id);
@@ -103,7 +99,7 @@ export default class _Object {
     }
     await (request('/api/v1/group/content', {
       method: 'POST',
-      base: this.getApiBase(),
+      origin: this.store.apiOrigin,
       body: payload,
     }) as Promise<IPostContentResult>);
     await this.store.db.objects.where({ 'Content.id': id }).delete();
@@ -125,7 +121,7 @@ export default class _Object {
           {
             method: 'POST',
             body: { senders: [] },
-            base: this.getApiBase(),
+            origin: this.store.apiOrigin,
           },
         ) || [];
         if (contents.length > 0) {

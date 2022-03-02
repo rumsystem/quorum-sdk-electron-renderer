@@ -120,6 +120,78 @@ export default {
       await QuorumClient.Group.leave(group.group_id);
     }
 
+    // Auth
+    {
+      logSection('Auth');
+      const group = await QuorumClient.Group.create({
+        group_name: 'test',
+        consensus_type: 'poa',
+        encryption_type: 'public',
+        app_key: 'group_note',
+      });
+      const groupId = group.group_id;
+      const followingRule = await QuorumClient.Auth.getFollowingRule(groupId, 'POST');
+      assert(followingRule, 'get following rule');
+      const player2Publisher = 'CAISIQOx6+HI0x1Gaosl5YvNfexQD1qJpA8xVeOIh7DL+UmGZw==';
+      const addAllowListRet = await QuorumClient.Auth.updateAuthList({
+        group_id: groupId,
+        type: 'upd_alw_list',
+        config: {
+          action: 'add',
+          pubkey: player2Publisher,
+          trx_type: ['POST'],
+          memo: '',
+        },
+      });
+      assert(addAllowListRet, 'add allow List');
+      const removeAllowListRet = await QuorumClient.Auth.updateAuthList({
+        group_id: groupId,
+        type: 'upd_alw_list',
+        config: {
+          action: 'remove',
+          pubkey: player2Publisher,
+          trx_type: ['POST'],
+          memo: '',
+        },
+      });
+      assert(removeAllowListRet, 'remove allow List');
+      const updateFollowingRuleRet = await QuorumClient.Auth.updateFollowingRule({
+        group_id: groupId,
+        type: 'set_trx_auth_mode',
+        config: {
+          trx_type: 'POST',
+          trx_auth_mode: 'FOLLOW_DNY_LIST',
+          memo: '',
+        },
+      });
+      assert(updateFollowingRuleRet, 'update following rule to deny mode');
+      const addDenyListRet = await QuorumClient.Auth.updateAuthList({
+        group_id: groupId,
+        type: 'upd_dny_list',
+        config: {
+          action: 'add',
+          pubkey: player2Publisher,
+          trx_type: ['POST'],
+          memo: '',
+        },
+      });
+      assert(addDenyListRet, 'add allow List');
+      const removeDenyListRet = await QuorumClient.Auth.updateAuthList({
+        group_id: groupId,
+        type: 'upd_dny_list',
+        config: {
+          action: 'remove',
+          pubkey: player2Publisher,
+          trx_type: ['POST'],
+          memo: '',
+        },
+      });
+      assert(removeDenyListRet, 'remove allow List');
+      await QuorumClient.Auth.getAllowList(groupId);
+      await QuorumClient.Auth.getDenyList(groupId);
+      await QuorumClient.Group.leave(groupId);
+    }
+
     console.log('All tests passed !!');
   }
 }

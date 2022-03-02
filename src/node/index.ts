@@ -48,12 +48,16 @@ export default class Node {
   }
 
   async info() {
-    const info: INodeInfo = await request(`https://127.0.0.1:${this.store.port}/api/v1/node`);
+    const info: INodeInfo = await request('/api/v1/node', {
+      origin: this.store.apiOrigin
+    });
     return info;
   }
 
   async network() {
-    const network: INetwork = await request(`https://127.0.0.1:${this.store.port}/api/v1/network`);
+    const network: INetwork = await request('/api/v1/network', {
+      origin: this.store.apiOrigin
+    });
     return network;
   }
 
