@@ -146,6 +146,95 @@ const objects = await QuorumClient.Object.list();
 console.log(objects);
 ```
 
+## Auth
+
+### get following rule
+```js
+const followingRule = await QuorumClient.Auth.getFollowingRule(groupId, 'POST');
+console.log(followingRule);
+```
+
+### update following rule
+```js
+await QuorumClient.Auth.updateFollowingRule({
+  group_id: groupId,
+  type: 'set_trx_auth_mode',
+  config: {
+    trx_type: 'POST',
+    trx_auth_mode: 'FOLLOW_DNY_LIST',
+    memo: '',
+  },
+});
+```
+
+### add a publisher to allow list
+```js
+await QuorumClient.Auth.updateAuthList({
+  group_id: groupId,
+  type: 'upd_alw_list',
+  config: {
+    action: 'add',
+    pubkey: player2Publisher,
+    trx_type: ['POST'],
+    memo: '',
+  },
+});
+```
+
+### remove a publisher from allow list
+```js
+await QuorumClient.Auth.updateAuthList({
+  group_id: groupId,
+  type: 'upd_alw_list',
+  config: {
+    action: 'remove',
+    pubkey: player2Publisher,
+    trx_type: ['POST'],
+    memo: '',
+  },
+});
+```
+
+### add a publisher to deny list
+```js
+await QuorumClient.Auth.updateAuthList({
+  group_id: groupId,
+  type: 'upd_dny_list',
+  config: {
+    action: 'add',
+    pubkey: player2Publisher,
+    trx_type: ['POST'],
+    memo: '',
+  },
+})
+```
+
+### remove a publisher from deny list
+```js
+await QuorumClient.Auth.updateAuthList({
+  group_id: groupId,
+  type: 'upd_dny_list',
+  config: {
+    action: 'remove',
+    pubkey: player2Publisher,
+    trx_type: ['POST'],
+    memo: '',
+  },
+});
+```
+
+### get allow list
+```js
+const allowList = await QuorumClient.Auth.getAllowList(groupId);
+console.log(allowList);
+```
+
+### get deny list
+```js
+const denyList = await QuorumClient.Auth.getDenyList(groupId);
+console.log(denyList);
+```
+
 ## Run testing script
 
 ```js
