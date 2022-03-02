@@ -148,6 +148,8 @@ console.log(objects);
 
 ## Auth
 
+For more detail, you can check [Quorum auth protocol explained](https://github.com/rumsystem/quorum/blob/main/Tutorial.md#test-chainconfig)
+
 ### get following rule
 ```js
 const followingRule = await QuorumClient.Auth.getFollowingRule(groupId, 'POST');
