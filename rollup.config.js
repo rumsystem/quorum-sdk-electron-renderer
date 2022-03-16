@@ -26,7 +26,7 @@ module.exports = {
         // 文件输出配置
         {
             file: 'dist/index.js', // 打包后生产的文件位置，及文件名
-            format: 'cjs',
+            format: 'umd',
             name: 'utools', // 包的全局变量名称
             banner
         },
