@@ -17,7 +17,7 @@ $ yarn add quorum-sdk-electron-renderer
 
 ## QuorumClient
 
-** Note: Make sure you have installed and setup [Quorum-sdk-electron-main](https://bitbucket.org/pressone/quorum-sdk-electron-main) in Electron main process. **
+** Note: Make sure you have installed and setup [Quorum-sdk-electron-main](https://github.com/rumsystem/quorum-sdk-electron-main) in Electron main process. **
 
 ```js
 import QuorumSDK from 'quorum-sdk-electron-renderer';
