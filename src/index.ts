@@ -1,25 +1,18 @@
 import Database from './database';
-
 import Node from './node';
-
 import _Object from './object';
-
 import Group from './group';
-
 import Auth from './auth';
 
-import { sendRequest, ProcessStatus, initQuorum } from './utils/quorumUtils';
+export * from './database';
+export * from './node';
+export * from './object';
+export * from './group';
+export * from './auth';
 
 import Test from './test';
 
-export * from './group';
-
-export * from './object';
-
-export * from './database';
-
-export * from './node';
-
+import { sendRequest, ProcessStatus, initQuorum } from './utils/quorumUtils';
 export type { ProcessStatus } from './utils/quorumUtils'
 
 export interface IStore {

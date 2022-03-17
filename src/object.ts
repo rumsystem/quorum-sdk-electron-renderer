@@ -30,6 +30,24 @@ export interface IContentItem {
   Content: IContent
 }
 
+export interface IFetchContentsOptions {
+  num: number
+  starttrx?: string
+  reverse?: boolean
+  senders?: string[]
+}
+
+export interface ITrx {
+  TrxId: string
+  GroupId: string
+  SenderPubkey: string
+  Data: string
+  TimeStamp: number
+  Version: string
+  Expired: number
+  SenderSign: string
+}
+
 type IOnChange = (objects: IDbObjectItem[]) => void
 
 export default class _Object {
@@ -114,16 +132,12 @@ export default class _Object {
     (async () => {
       const store = electronStore.get();
       const GROUP_START_TRX_KEY = `${groupId}_startTrx`;
-      let startTrx = store.get(GROUP_START_TRX_KEY);
+      let startTrx = store.get(GROUP_START_TRX_KEY) as string;
       while (this.polling) {
-        const contents: Array<IContentItem> = await request(
-          `/app/api/v1/group/${groupId}/content?${qs.stringify({ num: 100, starttrx: startTrx })}`,
-          {
-            method: 'POST',
-            body: { senders: [] },
-            origin: this.store.apiOrigin,
-          },
-        ) || [];
+        const contents: Array<IContentItem> = await this.fetchContents(groupId, {
+          num: 100,
+          starttrx: startTrx
+        })
         if (contents.length > 0) {
           const changedObjects: IDbObjectItem[] = [];
           for (const content of contents) {
@@ -176,5 +190,26 @@ export default class _Object {
       Status: ContentStatus.synced,
     });
     return null;
+  }
+
+
+  async fetchContents(groupId: string, options: IFetchContentsOptions) {
+    const { senders = [] } = options;
+    delete options.senders;
+    const contents: Array<IContentItem> = await request(
+      `/app/api/v1/group/${groupId}/content?${qs.stringify(options)}`,
+      {
+        method: 'POST',
+        body: { senders },
+        origin: this.store.apiOrigin,
+      },
+    ) || [];
+    return contents;
+  }
+
+  fetchTrx(GroupId: string, TrxId: string) {
+    return request(`/api/v1/trx/${GroupId}/${TrxId}`, {
+      origin: this.store.apiOrigin,
+    }) as Promise<ITrx>;
   }
 }

@@ -117,6 +117,8 @@ export default {
       assert(objects.find((o) => o.TrxId === object.TrxId), 'object changed');
       const syncedObject = await QuorumClient.Object.getByTrxId(object.TrxId);
       assert(syncedObject && syncedObject.Status === ContentStatus.synced, 'object synced');
+      const trx = await QuorumClient.Object.fetchTrx(group.group_id, object.TrxId);
+      assert(trx, 'fetch trx');
       await QuorumClient.Group.leave(group.group_id);
     }
 
