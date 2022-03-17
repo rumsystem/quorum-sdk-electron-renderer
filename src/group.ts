@@ -5,13 +5,11 @@ export interface IGetGroupsResult {
   groups: Array<IGroup> | null
 }
 
-
 export enum GroupStatus {
   IDLE = 'IDLE',
   SYNCING = 'SYNCING',
   SYNC_FAILED = 'SYNC_FAILED',
 }
-
 
 export interface IGroup {
   owner_pubkey: string
@@ -21,17 +19,11 @@ export interface IGroup {
   consensus_type: string
   encryption_type: string
   cipher_key: string
-  app_key: GROUP_TEMPLATE_TYPE
+  app_key: string
   last_updated: number
   highest_height: number
   highest_block_id: string
   group_status: GroupStatus
-}
-
-export enum GROUP_TEMPLATE_TYPE {
-  TIMELINE = 'group_timeline',
-  POST = 'group_post',
-  NOTE = 'group_note',
 }
 
 export interface ICreateGroupsResult {

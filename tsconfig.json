@@ -9,6 +9,7 @@
     "jsx": "preserve",
     "pretty": true,
     "sourceMap": true,
+    "skipLibCheck": true,
     /* Additional Checks */
     "noUnusedLocals": true,
     "noUnusedParameters": true,

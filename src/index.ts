@@ -12,6 +12,16 @@ import { sendRequest, ProcessStatus, initQuorum } from './utils/quorumUtils';
 
 import Test from './test';
 
+export * from './group';
+
+export * from './object';
+
+export * from './database';
+
+export * from './node';
+
+export type { ProcessStatus } from './utils/quorumUtils'
+
 export interface IStore {
   db: Database
   apiOrigin: string
